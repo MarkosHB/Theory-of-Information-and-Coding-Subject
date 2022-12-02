@@ -1,0 +1,103 @@
+#########################################
+# Preliminares. Importacion del paquete #
+#########################################
+gap> LoadPackage("guava");
+  ___________________________________________________________________________
+ /        ___
+||       /   \                 /\    Version 2.9.5
+||      ||   ||  |\    |      /  \               /\       Erhard Aichinger
+ \___   ||   ||  |\\   |     /____\_____________/__\      Franz Binder
+     \  ||   ||  | \\  |    /      \     ||    /    \     Juergen Ecker
+     ||  \___/   |  \\ |   /        \    ||   /      \    Peter Mayr
+     ||          |   \\|  /          \   ||               Christof Noebauer
+ \___/           |    \|                 ||
+
+ System    Of   Nearrings     And      Their Applications
+ Info: https://gap-packages.github.io/sonata/
+
+
+   ____                             |
+  /                \          /   --+--  Version 3.17
+ /       |     | |\ \        / /|   |
+|    __  |     | | \ \      / / |          the GUAVA Group
+|      | |     | |--\ \    / /--|
+ \     | |     | |   \ \  / /   |
+  \___/   \___/  |    \ \/ /    |
+
+ Homepage: https://gap-packages.github.io/guava
+ Report issues at https://github.com/gap-packages/guava/issues
+true
+
+##############################
+# Construccion del codigo C1 #
+##############################
+gap> G := [[1,1,0,0,0,0,0],[0,1,1,0,1,1,0],[1,1,1,0,0,1,1],[1,1,1,0,0,1,1],[0,0,0,1,0,1,1]];
+[ [ 1, 1, 0, 0, 0, 0, 0 ], [ 0, 1, 1, 0, 1, 1, 0 ], [ 1, 1, 1, 0, 0, 1, 1 ], 
+  [ 1, 1, 1, 0, 0, 1, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ] ]
+  
+gap> C1 := GeneratorMatCode(G,GF(2));
+a linear [7,4,1..2]1..3 code defined by generator matrix over GF(2)
+
+######################################
+# Listado de las palabras del codigo #
+######################################
+gap> C := Elements(C1);
+[ [ 0 0 0 0 0 0 0 ], [ 0 0 0 1 0 1 1 ], [ 0 0 1 0 0 1 1 ], [ 0 0 1 1 0 0 0 ], 
+  [ 0 1 0 0 1 0 1 ], [ 0 1 0 1 1 1 0 ], [ 0 1 1 0 1 1 0 ], [ 0 1 1 1 1 0 1 ], 
+  [ 1 0 0 0 1 0 1 ], [ 1 0 0 1 1 1 0 ], [ 1 0 1 0 1 1 0 ], [ 1 0 1 1 1 0 1 ], 
+  [ 1 1 0 0 0 0 0 ], [ 1 1 0 1 0 1 1 ], [ 1 1 1 0 0 1 1 ], [ 1 1 1 1 0 0 0 ] ]
+
+#######################################
+# Longitud de las palabras del codigo #
+#######################################
+gap> L := WordLength(C1);
+7
+
+########################
+# Dimension del codigo #
+########################
+gap> D := Dimension(C1);
+4
+
+###################################
+# Minima Distancia entre palabras #
+###################################
+gap> M := MinimumDistance(C1);
+2
+
+gap> Check := CheckMat(C1);
+<an immutable 3x7 matrix over GF2>
+
+gap> Codeword(Check);
+[ [ 1 1 0 0 1 0 0 ], [ 0 0 1 1 0 1 0 ], [ 1 1 1 1 0 0 1 ] ]
+
+#########################################
+# Distribucion de pesos de las palabras #
+#########################################
+gap> Dist := WeightDistribution(C1);
+[ 1, 0, 2, 4, 5, 4, 0, 0 ]
+
+#####################################
+# Numero de palabras para cada peso #
+#####################################
+gap> Cover := CoveringRadius(C1);
+2
+
+######################################
+# Comprobar si el codigo es perfecto #
+######################################
+gap> perf := IsPerfectCode(C1);
+false
+
+#################################
+# Comprobar si el codigo es MDS #
+#################################
+gap> mds := IsMDSCode(C1);
+false
+
+#################################
+# Codificar la informacion 1101 #
+#################################
+brk> [1101] * C1;
+[ 1 1 0 0 0 0 0 ]
+
